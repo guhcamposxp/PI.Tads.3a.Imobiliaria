@@ -1,42 +1,56 @@
 <%-- 
-    Document   : index
-    Created on : 22/04/2017, 14:56:36
-    Author     : Felipe
+    Document   : menu
+    Created on : 16/10/2017, 18:19:25
+    Author     : felipe.joliveira
 --%>
 
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/slate/bootstrap.min.css" rel="stylesheet prefetch">
-        <link rel="stylesheet" href="css/styleLogin.css">
-        <title>Tela de login</title>
-    </head>
-    <body>
-        <div class="telaLogin">
+        <title>Login</title>
+        <link href="${pageContext.request.contextPath}/all/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/all/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <script src="${pageContext.request.contextPath}/all/vendor/datatables/dataTables.bootstrap4.js" type="text/javascript"></script>
+        <link href="${pageContext.request.contextPath}/css/sb-admin.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet" type="text/css"/>
 
-            <form class="formLogin" action="${pageContext.request.contextPath}/validLogin" method="post">
-                <h2 class="tituloSistema">Sistema Imobiliário</h2>
-                <input type="text" class="form-control" name="usuario" placeholder="Usuário" required="" autofocus="" />
-                <input type="password" class="form-control" name="senha" placeholder="Senha" required=""/>
-                <label class="checkbox">
-                    <input type="checkbox" value="lembrar-me" id="lembrarMe" name="lembrarMe"> Lembrar-me
-                </label>
-                <input class="btn btn-lg btn-primary btn-block" type="submit" >Acessar</input>
-            </form>
-            <div class="divRequisito">
-                
-                <label id="lbRequisito"> Requisito mínimo para visualização: </label>
-                <label id="lbFirefox"> Firefox versão 31 </label>
-                <label id="lbChrome"> Chrome versão 36 </label>
-                <br>
-                      <img src="img/firefox.png" id="imgFirefox" width="80px" height="76px">
-                      <img src="img/chrome.png" id="imgChrome" width="80px" height="76px">
-            </div>
-        </div>
+    </head>
+    <body class="bg-dark">
+
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">
+        <img src="${pageContext.request.contextPath}/img/2.png" width="300px" height="200px" class="img-responsive"/>
+        <label>Sistema Imobiliário</label>
+      </div>
+      <div class="card-body">
+        <form class="formLogin" action="${pageContext.request.contextPath}/validLogin" method="post">
+          <div class="form-group">
+            <label>Usuário</label>
+            <input class="form-control" name="usuario" id="inputUser" type="text" required="" autofocus="">
+          </div>
+          <div class="form-group">
+            <label>Senha</label>
+            <input class="form-control" name="senha" id="inputPass" type="password" required="">
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" value="Logar">
+        </form>
+      </div>
+    </div>
+  </div>
+
+        <script src="${pageContext.request.contextPath}/all/vendor/jquery/jquery.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/popper/popper.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/jquery-easing/jquery.easing.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/chart.js/Chart.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/datatables/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/all/vendor/datatables/dataTables.bootstrap4.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/sb-admin.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/sb-admin-datatables.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/js/sb-admin-charts.min.js" type="text/javascript"></script>
         
     </body>
 </html>

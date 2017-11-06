@@ -1,457 +1,319 @@
+<%-- 
+    Document   : cadastrarImovel
+    Created on : 16/10/2017, 18:44:02
+    Author     : felipe.joliveira
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-
     <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
-    <link href="{pageContext.request.contextPath}/css/style.css" rel="stylesheet">	
-    <c:import url="Menu.jsp"></c:import>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cadastrar Imóvel</title>
+        <link href="../all/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../all/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <script src="../all/vendor/datatables/dataTables.bootstrap4.js" type="text/javascript"></script>
+        <link href="../css/sb-admin.css" rel="stylesheet" type="text/css"/>
+        <link href="../css/custom.css" rel="stylesheet" type="text/css"/>
 
 
-    <title>Cadastro de Imóvel</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/view/BoasVindas.jsp">Away - Sistema Imobiliário</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#opcoesImoveis" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-home" aria-hidden="true"></i>
+                            <span class="nav-link-text">Imóveis</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="opcoesImoveis">
+                            <li>
+                                <a class="fa fa-plus" aria-hidden="false" href="${pageContext.request.contextPath}/view/cadastrarImovel.jsp"> Cadastrar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-search" aria-hidden="true" href="${pageContext.request.contextPath}/view/consultarImovel.jsp"> Consultar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-wrench" aria-hidden="true" href="${pageContext.request.contextPath}/view/gerenciarImovel.jsp"> Gerenciar</a>
+                            </li>
+                        </ul>
+                    </li>
 
-</head>
-<body>
-    
-       <c:if test = "${retorno == 'criacao'}">
-            <div id="sucess" class="alert alert-success">
-                <strong>Successo!</strong> O cadastro foi salvo corretamente.
-            </div> 
-            <script>
-                var div = document.getElementById("#sucess");
-                var x = '${retorno}';
-                function explode() {
-                    $("#sucess").hide();
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#dropClientes" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-user" aria-hidden="true"></i>
+                            <span class="nav-link-text">Clientes</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="dropClientes">
+                            <li>
+                                <a class="fa fa-plus" aria-hidden="false" href="${pageContext.request.contextPath}/view/cadastrarCliente.jsp"> Cadastrar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-search" aria-hidden="true" href="${pageContext.request.contextPath}/view/consultarCliente.jsp"> Consultar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-wrench" aria-hidden="true" href="${pageContext.request.contextPath}/view/gerenciarCliente.jsp"> Gerenciar</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                }
-                setTimeout(explode, 5000);
-                x = "";
-            </script>
-        </c:if>
-        <c:if test = "${retorno == 'alteracao'}">
-            <div class="alert alert-success">
-                <strong>Sucesso!</strong> Alteração realizada com sucesso.
-            </div>  
-            <script>
-                var div = document.getElementById("#sucess");
-                 var x = '${retorno}';
-                function explode() {
-                    $("#sucess").hide();
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#dropFuncionario" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-users" aria-hidden="true"></i>
+                            <span class="nav-link-text">Funcionários</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="dropFuncionario">
+                            <li>
+                                <a class="fa fa-plus" aria-hidden="false" href="${pageContext.request.contextPath}/view/cadastrarFuncionario.jsp"> Cadastrar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-search" aria-hidden="true" href="${pageContext.request.contextPath}/view/consultarFuncionario.jsp"> Consultar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-wrench" aria-hidden="true" href="${pageContext.request.contextPath}/view/gerenciarImovel.jsp"> Gerenciar</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                }
-                setTimeout(explode, 5000);
-                x = "";
-            </script>
-        </c:if>
-            <c:if test = "${retorno == 'erro'}">
-            <div class="alert alert-danger">
-                <strong>Erro!</strong> Houve um erro no modulo back-end, entre em contato com administrador do sistema.
-            </div>  
-            <script>
-                var div = document.getElementById("#sucess");
-                 var x = '${retorno}';
-                function explode() {
-                    $("#sucess").hide();
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#dropFiliais" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-building" aria-hidden="true"></i>
+                            <span class="nav-link-text">Filiais</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="dropFiliais">
+                            <li>
+                                <a class="fa fa-plus" aria-hidden="false" href="${pageContext.request.contextPath}/view/cadastarFilial.jsp"> Cadastrar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-search" aria-hidden="true" href="${pageContext.request.contextPath}/view/consultarFilial.jsp"> Consultar</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-wrench" aria-hidden="true" href="${pageContext.request.contextPath}/view/gerenciarFilial.jsp"> Gerenciar</a>
+                            </li>
+                        </ul>
+                    </li>
 
-                }
-                setTimeout(explode, 5000);
-                x = "";
-            </script>
-        </c:if>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#dropContratos" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-files-o" aria-hidden="true"></i>
+                            <span class="nav-link-text">Contratos</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="dropContratos">
+                            <li>
+                                <a class="fa fa-usd" aria-hidden="false" href=""> Contrato de Venda</a>
+                            </li>
+                            <li>
+                                <a class="fa fa-file-o" aria-hidden="true" href=""> Contrato de Aluguel</a>
+                            </li>
+                        </ul>
+                    </li>
 
-    <div class="container">
 
-        <form name="formImovel" id="formularioImovel" class="well form-horizontal" action="../ImovelServlet" method="post">
 
-            <fieldset>
+                </ul>
+                <ul class="navbar-nav sidenav-toggler">
+                    <li class="nav-item">
+                        <a class="nav-link text-center" id="sidenavToggler">
+                            <i class="fa fa-fw fa-angle-left"></i>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fa fa-fw fa-sign-out"></i>Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-                <legend>Cadastrar Imóvel</legend>
+        <div class="content-wrapper">
 
-                <!-- Copiar o form group inteiro -->
-                <div class="form-group">
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Rua:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="text" name="endRuaImovel" value="" placeholder="Nome da rua..." class="form-control col-lg-12 col-md-12" maxlength="41"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Número:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="endNumImovel" value="" placeholder="Ex.: Número da casa/condomínio..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Bairro:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="text" name="endBairroImovel" value="" placeholder="Nome do bairro..." class="form-control col-lg-12 col-md-12" maxlength="41" />
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+      <div class="container">
+        <div class="card card-register mx-auto mt-5">
+          <div class="card-header cardRegistro">Registar Novo Imóvel</div>
+          <div class="card-body campos">
+            <form id="FormImovel">
+              <div class="form-group col-lg-12 divContato ">
+                <h5>
+                  Proprietário
+                </h5>
+              <hr/>
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label for="">CPF</label>
+                    <input class="form-control maskCPF campos" id="clienteCpf" type="text" aria-describedby="nameHelp" placeholder="000.000.000-00">
+                  </div>
                 </div>
-                <!-- Copiar o form group inteiro -->
-
-                <div class="form-group">
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">CEP:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="text" name="endCepImovel" value="" placeholder="00000-000" class="form-control col-lg-12 col-md-12" maxlength="9" onkeypress="mascaraCep(this)"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Estado:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <select  name="endEstImovel" class="form-control col-lg-12 col-md-12">
-                                    <option value="nulo" >Selecione</option>
-                                    <option value="AC">Acre</option>
-                                    <option value="AL">Alagoas</option>
-                                    <option value="AP">Amapá</option>
-                                    <option value="AM">Amazonas</option>
-                                    <option value="BA">Bahia</option>
-                                    <option value="CE">Ceará</option>
-                                    <option value="DF">Distrito Federal</option>
-                                    <option value="ES">Espírito Santo</option>
-                                    <option value="GO">Goiás</option>
-                                    <option value="MA">Maranhão</option>
-                                    <option value="MT">Mato Grosso</option>
-                                    <option value="MS">Mato Grosso do Sul</option>
-                                    <option value="MG">Minas Gerais</option>
-                                    <option value="PA">Pará</option>
-                                    <option value="PB">Paraíba</option>
-                                    <option value="PR">Paraná</option>
-                                    <option value="PE">Pernambuco</option>
-                                    <option value="PI">Piauí</option>
-                                    <option value="RJ">Rio de Janeiro</option>
-                                    <option value="RN">Rio Grande do Norte</option>
-                                    <option value="RS">Rio Grande do Sul</option>
-                                    <option value="RO">Rondônia</option>
-                                    <option value="RR">Roraima</option>
-                                    <option value="SC">Santa Catarina</option>
-                                    <option value="SP">São Paulo</option>
-                                    <option value="SE">Sergipe</option>
-                                    <option value="TO">Tocantins</option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Cidade:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="text" name="endCidImovel" placeholder="Nome da cidade" class="form-control col-lg-12 col-md-12" maxlength="41"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Complemento:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="text" name="endCompImovel" value="" placeholder="Ex.: Bloco e apartamento..." class="form-control col-lg-12 col-md-12" maxlength="41"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Área útil:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="areaImovel" value="" placeholder="Em metros quadrados..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Quartos:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="quartosImovel" value="" placeholder="Total de quartos..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Suítes:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="suitesImovel" value="" placeholder="Total de suítes..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Cozinhas:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="cozinhasImovel" value="" placeholder="Total de cozinhas..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Salas Comuns:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="salasComumImovel" value="" placeholder="Total de salas comuns..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Salas de Jantar:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="salasJantarImovel" value="" placeholder="Total de salas de jantar..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Banheiros:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="banheirosImovel" value="" placeholder="Total de banheiros..." class="form-control col-lg-12 col-md-12" min="1" max="6"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Quantidade de Vagas para Carro:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="vagasImovel" value="" placeholder="Total de vagas..." class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Valor de Venda:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="valorVendaImovel" value="" placeholder="R$ 000.00" class="form-control col-lg-12 col-md-12"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Valor do Aluguel:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <input type="number" name="valorAluguelImovel" value="" placeholder="R$ 000.00" class="form-control col-lg-12 col-md-12" onkeypress="mascaraDinheiro(this)"/>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-4 col-md-4">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Tipo de Imóvel:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <select  name="tipoImovel" class="form-control col-lg-12 col-md-12">
-                                    <option value="nulo" >Selecione</option>
-                                    <option value="Casa">Casa</option>
-                                    <option value="Apartamento">Apartamento</option>
-                                    <option value="Kitnet">Kitnet</option>
-                                    <option value="Flat">Flat</option>
-                                    <option value="Cobertura">Cobertura</option>
-                                    <option value="Mansão">Mansão</option>
-                                    <option value="Casa na praia">Casa na praia</option>
-                                    <option value="Casa no Campo">Casa no Campo</option>
-                                    <option value="Sala Comercial">Sala Comercial</option>
-                                    <option value="Galpão">Galpão</option>
-                                    <option value="Sítio/Chácara">Sítio/Chácara</option>
-                                    <option value="Fazenda">Fazenda</option>
-                                </select>
-
-                            </div>
-
-                        </div>
-
+              </div>
+
+          <div class="form-group col-lg-12 divContato" >
+            <h5>
+              Endereço
+            </h5>
+          <hr/>
+          <div class="form-row">
+            <div class="col-md-8">
+            <label for="">Rua</label>
+            <input class="form-control campos" id="imovelRua" type="text">
+            </div>
+            <div class="col-md-2">
+            <label for="">Número</label>
+            <input class="form-control campos" id="imovelNumero" type="text" aria-describedby="emailHelp">
+            </div>
+            <div class="col-md-3">
+            <label for="">Complemento</label>
+            <input class="form-control campos" id="imovelComplemento" type="email">
+            </div>
+            <div class="col-md-2">
+            <label for="">CEP</label>
+            <input class="form-control maskCEP campos" id="imovelCep" type="text" placeholder="00000-000">
+            </div>
+            <div class="col-md-5">
+            <label for="">Bairro</label>
+            <input class="form-control campos" id="imovelBairro" type="email">
+            </div>
+            <div class="col-md-5">
+            <label for="">Cidade</label>
+            <input class="form-control campos" id="imovelCidade" type="email">
+            </div>
+            <div class="col-md-5">
+            <label for="exampleInputEmail1">Estado</label>
+            <select class="form-control" id="imovelCidade">
+              <option value="null">Selecione</option>
+              <option value="">Acre</option>
+              <option value="">Alagoas</option>
+              <option value="">Amapá</option>
+              <option value="">Amazonas</option>
+              <option value="">Bahia</option>
+              <option value="">Ceará</option>
+              <option value="">Distrito Federal</option>
+              <option value="">Espírito Santo</option>
+              <option value="">Goiás</option>
+              <option value="">Maranhão</option>
+              <option value="">Mato Grosso</option>
+              <option value="">Mato Grosso do Sul</option>
+              <option value="">Minas Gerais</option>
+              <option value="">Pará</option>
+              <option value="">Paraíba</option>
+              <option value="">Paraná</option>
+              <option value="">Pernambuco</option>
+              <option value="">Piauí</option>
+              <option value="">Rio de Janeiro</option>
+              <option value="">Rio Grande do Norte</option>
+              <option value="">Rio Grande do Sul</option>
+              <option value="">Rondônia</option>
+              <option value="">Roraima</option>
+              <option value="">Santa Catarina</option>
+              <option value="">São Paulo</option>
+              <option value="">Sergipe</option>
+              <option value="">Tocantins</option>
+            </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-lg-12 divContato" >
+          <h5>
+            Dados do Imóvel
+          </h5>
+        <hr/>
+        <div class="form-row">
+          <div class="col-md-5">
+          <label for="exampleInputEmail1">Tipo de transação</label></br>
+          <label class="checkbox-inline campos"><input type="checkbox" value=""> Venda</label>
+          <label class="checkbox-inline fcampos"><input type="checkbox" value=""> Aluguel</label>
+          <label class="checkbox-inline campos"><input type="checkbox" value=""> Venda e Aluguel</label>
+          </div>
+
+          <div class="col-md-3">
+          <label for="exampleInputEmail1">Complemento</label>
+          <input class="form-control campos" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" >
+          </div>
+          <div class="col-md-2">
+          <label for="exampleInputEmail1">CEP</label>
+          <input class="form-control maskCEP campos" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="00000-000">
+          </div>
+          <div class="col-md-5">
+          <label for="exampleInputEmail1">Bairro</label>
+          <input class="form-control campos" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" >
+          </div>
+          <div class="col-md-5">
+          <label for="exampleInputEmail1">Cidade</label>
+          <input class="form-control campos" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" >
+          </div>
+          <div class="col-md-5">
+          <label for="exampleInputEmail1">Estado</label>
+          <select class="form-control" id="sel1">
+            <option value="uf">Selecione</option>
+            <option value="">Acre</option>
+            <option value="">Alagoas</option>
+            <option value="">Amapá</option>
+            <option value="">Amazonas</option>
+
+          </select>
+          </div>
+        </div>
+      </div>
+
+            </form>
+            <a href="#" class="btn btn-success">Registrar</a>
+            <a class="btn btn-warning limpar" href="">Limpar</a>
+            <a href="index.html" class="btn btn-primary">Cancelar</a>
+            <hr/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+            <footer class="sticky-footer">
+                <div class="container">
+                    <div class="text-center">
+                        <small>© Copyright 2017 Away</small>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="col-lg-12 col-md-12">
-
-                        <div class="row">
-
-                            <label class="col-lg-12 col-md-12">Descrição do Imóvel:</label>
-
-                            <div class="col-lg-12 col-md-12">
-
-                                <textarea name="descricaoImovel" class="form-control col-lg-12 col-md-12" rows="3" maxlength="254"></textarea> 
-
-                            </div>
-
+            </footer>
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja sair?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
                         </div>
-
+                        <div class="modal-body">Clique em "Sair" abaixo se você deseja realmente sair.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                            <a class="btn btn-primary" href="login.html">Sair</a>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <div class="col-lg-10 col-md-10">
-                        <button type="submit" class="btn btn-primary" onclick="valida()">Cadastrar</button>
-                    </div>
-                </div>
-                </div>
+            <script src="../all/vendor/jquery/jquery.min.js" type="text/javascript"></script>
+            <script src="../all/vendor/popper/popper.min.js" type="text/javascript"></script>
+            <script src="../all/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="../all/vendor/jquery-easing/jquery.easing.min.js" type="text/javascript"></script>
+            <script src="../all/vendor/chart.js/Chart.min.js" type="text/javascript"></script>
+            <script src="../all/vendor/datatables/jquery.dataTables.js" type="text/javascript"></script>
+            <script src="../all/vendor/datatables/dataTables.bootstrap4.js" type="text/javascript"></script>
+            <script src="../js/sb-admin.min.js" type="text/javascript"></script>
+            <script src="../js/sb-admin-datatables.min.js" type="text/javascript"></script>
+            <script src="../js/sb-admin-charts.min.js" type="text/javascript"></script>
+            <script src="../js/jquery.mask.js" type="text/javascript"></script>
+            <script src="../js/masks.js" type="text/javascript"></script>
 
-
-
-            </fieldset>
-
-        </form>
-
-</body>
-</html>
-
+    </body>
 </html>
